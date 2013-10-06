@@ -5,5 +5,7 @@ FactoryGirl.define do
     first_name "MyString"
     last_name "MyString"
     birthday "2013-10-06"
+    email "MyString"
+    phone "MyString"
   end
 end
