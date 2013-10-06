@@ -44,7 +44,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
-    database_cleaner (1.1.1)
+    database_cleaner (1.0.1)
     debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -171,7 +171,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass!
   coffee-rails (~> 4.0.0)
-  database_cleaner
+  database_cleaner (< 1.1.0)
   debugger
   factory_girl_rails
   haml-rails (~> 0.4)
