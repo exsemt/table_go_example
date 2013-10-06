@@ -18,7 +18,7 @@ gem 'turbolinks'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'table_go', '0.2.2'
-gem "will_paginate", '~> 3.0.4'
+gem "will_paginate-bootstrap"
 gem "bootstrap-sass", git: 'git@github.com:thomas-mcdonald/bootstrap-sass.git' # bootstrap 3
 
 gem 'faker'
