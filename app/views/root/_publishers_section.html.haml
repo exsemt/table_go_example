@@ -1,0 +1,11 @@
+.page-header
+  %h1
+    Simple table
+= render('publishers.html.haml')
+
+%pre
+  = "HAML:\n" + File.read(Rails.root + 'app/views/root/_publishers.html.haml')
+
+%pre
+  = "ERB:\n" + File.read(Rails.root + 'app/views/root/_publishers.html.erb')
+

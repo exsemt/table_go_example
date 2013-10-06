@@ -1,0 +1,6 @@
+<div class="pull-right"><%= will_paginate(@publishers) %></div>
+
+<%= table_go_for @publishers, Publisher, :table_html => {:class => 'table table-hover'} do |t| %>
+  <% t.column :name %>
+  <% t.column :place %>
+<% end %>

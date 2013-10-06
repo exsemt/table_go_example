@@ -5,7 +5,7 @@ namespace :db do
 
     #[Author, Book, Publisher].each(&:delete_all)
 
-    20.times do
+    5.times do
       Publisher.create(
         :name  => Faker::Company.name,
         :place => Faker::Address.city

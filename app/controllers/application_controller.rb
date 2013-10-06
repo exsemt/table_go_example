@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
     def pagination_defaults
-      { :per_page => 30, :page => params[:page] }
+      { :per_page => 10, :page => params[:page] }
     end
 
 end
