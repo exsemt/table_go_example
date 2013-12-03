@@ -1,0 +1,6 @@
+.pull-right
+  = will_paginate(@authors)
+
+= table_go_for @authors, Author, :table_html => {:class => 'table table-striped table-hover table-bordered'} do |t|
+  - t.column :first_name
+  - t.column :last_name

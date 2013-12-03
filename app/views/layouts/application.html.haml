@@ -1,0 +1,22 @@
+!!!
+%html{:lang => I18n.locale}
+  %head
+    %title
+      TableGo Example
+    %meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    %meta{ :name => 'run-env', :content => Rails.env }
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    - if content_for? :css
+      = yield :css
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    - if content_for? :javascripts
+      = yield :javascripts
+    = csrf_meta_tags
+
+  %body
+    = render 'layouts/navigation'
+
+    .container
+      = yield
+
+      = render 'layouts/footer'
