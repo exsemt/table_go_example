@@ -23,6 +23,10 @@ gem "bootstrap-sass", '~> 3.0.2.1'
 
 gem 'faker'
 
+# Deploy with Capistrano
+gem 'capistrano'#, '2.11.2'
+gem 'rvm-capistrano'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
