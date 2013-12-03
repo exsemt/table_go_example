@@ -1,10 +1,3 @@
-GIT
-  remote: git@github.com:thomas-mcdonald/bootstrap-sass.git
-  revision: efab96f854dc8b08d46297b9af313fbe815124ac
-  specs:
-    bootstrap-sass (3.0.2.1)
-      sass (~> 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -34,6 +27,8 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bootstrap-sass (3.0.2.1)
+      sass (~> 3.2)
     builder (3.1.4)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -45,12 +40,12 @@ GEM
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     database_cleaner (1.0.1)
-    debugger (1.6.2)
+    debugger (1.6.3)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.3)
+      debugger-ruby_core_source (~> 1.2.4)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.3)
+    debugger-ruby_core_source (1.2.4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -64,14 +59,14 @@ GEM
     fastercsv (1.5.5)
     haml (4.0.4)
       tilt
-    haml-rails (0.4)
-      actionpack (>= 3.1, < 4.1)
-      activesupport (>= 3.1, < 4.1)
-      haml (>= 3.1, < 4.1)
-      railties (>= 3.1, < 4.1)
+    haml-rails (0.5.1)
+      actionpack (~> 4.0.0)
+      activesupport (~> 4.0.0)
+      haml (>= 3.1, < 5.0)
+      railties (~> 4.0.0)
     hike (1.2.3)
-    i18n (0.6.5)
-    jbuilder (1.5.2)
+    i18n (0.6.8)
+    jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
@@ -82,11 +77,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
-    mime-types (1.25)
+    mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.8.2)
     polyglot (0.3.3)
-    pry (0.9.12.3)
+    pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -138,7 +133,7 @@ GEM
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
     slop (3.4.7)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -148,7 +143,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
-    table_go (0.2.4)
+    table_go (0.2.5)
       actionpack
       fastercsv
     thor (0.18.1)
@@ -161,7 +156,7 @@ GEM
     turbolinks (1.3.1)
       coffee-rails
     tzinfo (0.3.38)
-    uglifier (2.3.1)
+    uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     will_paginate (3.0.5)
@@ -173,7 +168,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass!
+  bootstrap-sass (~> 3.0.2.1)
   coffee-rails (~> 4.0.0)
   database_cleaner (< 1.1.0)
   debugger
@@ -191,7 +186,7 @@ DEPENDENCIES
   sdoc
   shoulda-matchers
   sqlite3
-  table_go (= 0.2.4)
+  table_go (= 0.2.5)
   turbolinks
   uglifier (>= 1.3.0)
   will_paginate-bootstrap
