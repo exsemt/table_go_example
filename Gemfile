@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.1'
-gem "haml-rails", "~> 0.4"
+gem 'rails', '4.0.2'
+gem "haml-rails", "~> 0.5"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -19,9 +19,13 @@ gem 'turbolinks'
 
 gem 'table_go', '0.2.5'
 gem "will_paginate-bootstrap"
-gem "bootstrap-sass", '~> 3.0.2.1'
+gem "bootstrap-sass", '~> 3.0.3.0'
 
 gem 'faker'
+
+# Deploy with Capistrano
+gem 'capistrano'#, '2.11.2'
+gem 'rvm-capistrano'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
