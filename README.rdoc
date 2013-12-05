@@ -1,6 +1,14 @@
 == README
 
+link: http://table-go-example.exsemt.de
 
+== Changelog
+
+=== Not Yet Deployed
+
+=== 0.0.2
+
+* update rails
 
 === 0.0.1
 
