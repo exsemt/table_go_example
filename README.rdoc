@@ -6,6 +6,11 @@ link: http://table-go-example.exsemt.de
 
 === Not Yet Deployed
 
+=== 0.0.4
+
+* update ruby to 2.1.1
+* update rails to 4.1.rc2
+
 === 0.0.3
 
 * update to table_go 0.2.6

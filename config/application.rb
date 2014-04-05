@@ -22,6 +22,7 @@ module TableGoExample
     config.i18n.available_locales = [:de, :en]
     config.i18n.default_locale = :de
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    I18n.enforce_available_locales = false
 
     config.generators do |g|
       g.test_framework      :rspec
