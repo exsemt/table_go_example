@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0.rc2' #'4.0.2'
+gem 'rails', '4.1.0'
 gem "haml-rails", "~> 0.5"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -17,7 +17,7 @@ gem 'turbolinks'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-gem 'table_go', '0.2.6'
+gem 'table_go', '0.2.6', :path => "~/work/megorei/gems/table_go"
 gem "will_paginate-bootstrap"
 gem "bootstrap-sass", '>= 3.1.1.0'
 
@@ -39,7 +39,6 @@ group :development do
 end
 
 group :development, :test do
-  #gem 'debugger'
   gem 'pry-rails'
   gem 'pry-doc'
   gem "rspec-rails"
