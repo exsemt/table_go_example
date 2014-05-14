@@ -1,0 +1,7 @@
+.pull-right
+  = will_paginate(@books)
+
+= render 'books'
+
+= link_to('Download as CSV', books_path(format: :csv), class: 'btn btn-primary')
+= link_to('Download as XLSX', books_path(format: :xlsx), class: 'btn btn-primary')
