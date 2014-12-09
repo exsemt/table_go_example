@@ -3,5 +3,15 @@
 
 = render 'books'
 
-= link_to('Download as CSV', books_path(format: :csv), class: 'btn btn-primary')
-= link_to('Download as XLSX', books_path(format: :xlsx), class: 'btn btn-primary')
+%p
+  = link_to('Download as CSV', books_path(format: :csv), class: 'btn btn-primary')
+
+%pre
+  = "HAML:\n" + File.read(Rails.root + 'app/views/books/_books.html.haml')
+  %br
+  \= link_to('Download as CSV', books_path(format: :csv), class: 'btn btn-primary')
+
+
+%pre
+  = "Controller:\n" + File.read(Rails.root + 'app/controllers/books_controller.rb')
+

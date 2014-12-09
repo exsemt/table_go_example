@@ -12,17 +12,6 @@ class BooksController < ApplicationController
           :disposition => 'attachment'
         )
       end
-      format.xlsx do
-        send_data(
-          render_to_string(:template => 'books/index', :format => :xlsx),
-          # render(:partial => 'books/books.html.haml'),
-          # render_to_string(:partial => 'books/books.html.haml'),
-          # :partial => 'books/books.html.haml',
-          :filename => 'books.xlsx',
-          :type => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          :disposition => 'attachment'
-        )
-      end
     end
   end
 
