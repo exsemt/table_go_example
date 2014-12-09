@@ -12,6 +12,7 @@
     - if content_for? :javascripts
       = yield :javascripts
     = csrf_meta_tags
+    = render(partial: 'layouts/google_analytics.html.erb') if Rails.env.production?
 
   %body
     = render 'layouts/navigation'

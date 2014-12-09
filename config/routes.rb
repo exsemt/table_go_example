@@ -1,7 +1,7 @@
 TableGoExample::Application.routes.draw do
   root "root#index"
 
-
+  resources :books
 
   # =========================================================================================
   # The priority is based upon order of creation: first created -> highest priority.

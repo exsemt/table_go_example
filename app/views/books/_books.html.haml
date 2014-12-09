@@ -1,0 +1,5 @@
+= table_go_for @books, Book, :table_html => {:class => 'table table-striped table-hover table-bordered'} do |t|
+  - t.column :title
+  - t.column :isbn
+  - t.column :pages
+  - t.column :price, :as => :currency
