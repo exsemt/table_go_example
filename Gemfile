@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
-gem "haml-rails", "~> 0.5"
+gem 'rails', '4.1.8'
+gem "haml-rails", "~> 0.6"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -19,7 +19,7 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'table_go', '0.2.6', :path => "~/work/megorei/gems/table_go"
 gem "will_paginate-bootstrap"
-gem "bootstrap-sass", '>= 3.1.1.0'
+gem "bootstrap-sass", '>= 3.3'
 
 gem 'faker'
 
@@ -32,10 +32,6 @@ gem 'rvm-capistrano'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
-end
-
-group :development do
-  gem 'puma'
 end
 
 group :development, :test do
