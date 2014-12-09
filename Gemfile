@@ -17,7 +17,7 @@ gem 'turbolinks'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-gem 'table_go', '0.2.6', :path => "~/work/megorei/gems/table_go"
+gem 'table_go', '0.2.6'
 gem "will_paginate-bootstrap"
 gem "bootstrap-sass", '>= 3.3'
 
