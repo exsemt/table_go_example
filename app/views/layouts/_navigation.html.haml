@@ -4,5 +4,7 @@
       = link_to('TableGo Example', root_path, class: 'navbar-brand')
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li
+        %li(class="#{'active' if current_controller?('/$')}")
           = link_to('Basic', root_path)
+        %li(class="#{'active' if current_controller?('/books')}")
+          = link_to('Download CSV example', books_path)
