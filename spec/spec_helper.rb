@@ -14,7 +14,6 @@ require 'database_cleaner'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.color_enabled = true
   config.use_transactional_fixtures = false
 
   config.before(:suite) do

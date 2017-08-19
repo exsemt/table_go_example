@@ -8,5 +8,4 @@ describe RootController do
       response.should be_success
     end
   end
-
 end

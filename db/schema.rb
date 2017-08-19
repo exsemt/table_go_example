@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20131006162729) do
 
-  create_table "authors", force: true do |t|
+  create_table "authors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.date     "birthday"
@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(version: 20131006162729) do
     t.datetime "updated_at"
   end
 
-  create_table "authors_books", force: true do |t|
+  create_table "authors_books", force: :cascade do |t|
     t.integer  "author_id"
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "books", force: true do |t|
+  create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "isbn"
     t.integer  "pages"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20131006162729) do
     t.datetime "updated_at"
   end
 
-  create_table "publishers", force: true do |t|
+  create_table "publishers", force: :cascade do |t|
     t.string   "name"
     t.string   "place"
     t.datetime "created_at"
