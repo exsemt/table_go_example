@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.12
+* update ruby to 2.5.1
+* update gems
+
 # 0.11
 * update ruby to 2.4.1
 * update gems
