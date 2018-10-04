@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.9'
+gem 'rails', '5.2.1'
 gem "haml-rails"
 gem 'newrelic_rpm'
 
