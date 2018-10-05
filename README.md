@@ -1,3 +1,3 @@
-== README
+# README
 
 link: http://table-go-example.exsemt.de
