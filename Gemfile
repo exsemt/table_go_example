@@ -19,6 +19,8 @@ gem 'table_go', '0.2.6'
 gem "will_paginate-bootstrap"
 gem "bootstrap-sass", '>= 3.3'
 
+gem 'puma'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
