@@ -1,0 +1,43 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - db/**/*
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 15
+
+Rails:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false

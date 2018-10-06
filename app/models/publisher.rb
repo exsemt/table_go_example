@@ -1,4 +1,5 @@
-class Publisher < ActiveRecord::Base
-  has_many :books
+# frozen_string_literal: true
 
+class Publisher < ApplicationRecord
+  has_many :books, dependent: :nullify
 end
