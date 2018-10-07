@@ -40,7 +40,9 @@ rspec:
 #    - docker:dind
   script:
 #    - docker pull $TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec'
+#    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec'
+    - bundle exec rake db:create db:test:prepare RAILS_ENV=test
+    - "rspec -f d --color --tty"
 
 #deploy:
 #  stage: deploy
