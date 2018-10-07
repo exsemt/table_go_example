@@ -31,7 +31,7 @@ build:
     - docker:dind
   script:
     - docker build -t $TEST_IMAGE .
-    - RAILS_ENV=production bundle exec rake assets:precompile
+#    - RAILS_ENV=production bundle exec rake assets:precompile
     - docker push $TEST_IMAGE
 
 test:
