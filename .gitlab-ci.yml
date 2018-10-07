@@ -1,3 +1,4 @@
+# https://docs.gitlab.com/ce/ci/docker/using_docker_build.html
 image: docker:stable
 
 services:
@@ -6,14 +7,8 @@ services:
 stages:
 - build
 - test
+- release
 - deploy
-
-#variables:
-#  TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-#  LC_ALL: C.UTF-8
-#  LANG: en_US.UTF-8
-#  LANGUAGE: en_US.UTF-8
-#  RAILS_ENV: test
 
 variables:
   DOCKER_HOST: tcp://docker:2375
@@ -40,8 +35,16 @@ rspec:
   stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE \
-      /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
+    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
+
+#release-image:
+#  stage: release
+#  script:
+#  - docker pull $CONTAINER_TEST_IMAGE
+#  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+#  - docker push $CONTAINER_RELEASE_IMAGE
+#  only:
+#  - master
 
 #deploy:
 #  stage: deploy
