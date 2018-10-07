@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,40 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_131_006_162_729) do
-  create_table 'authors', force: :cascade do |t|
-    t.string   'first_name'
-    t.string   'last_name'
-    t.date     'birthday'
-    t.string   'email'
-    t.string   'phone'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+ActiveRecord::Schema.define(version: 2013_10_06_162729) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birthday"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table 'authors_books', force: :cascade do |t|
-    t.integer  'author_id'
-    t.integer  'book_id'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "authors_books", force: :cascade do |t|
+    t.integer "author_id"
+    t.integer "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table 'books', force: :cascade do |t|
-    t.string   'title'
-    t.string   'isbn'
-    t.integer  'pages'
-    t.integer  'edition'
-    t.decimal  'price', precision: 10, scale: 2
-    t.date     'release_date'
-    t.integer  'publisher_id'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "isbn"
+    t.integer "pages"
+    t.integer "edition"
+    t.decimal "price", precision: 10, scale: 2
+    t.date "release_date"
+    t.integer "publisher_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table 'publishers', force: :cascade do |t|
-    t.string   'name'
-    t.string   'place'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
+    t.string "place"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
 end
