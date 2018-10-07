@@ -1,0 +1,52 @@
+stages:
+- build
+- test
+#- deploy
+
+image: ruby:2.5.1
+
+variables:
+  TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  LC_ALL: C.UTF-8
+  LANG: en_US.UTF-8
+  LANGUAGE: en_US.UTF-8
+  RAILS_ENV: test
+#  RAILS_IMAGE: registry.gitlab.com/exsemt/table_go_example:$CI_COMMIT_SHA
+#  DEPLOY_TAG: $CI_COMMIT_SHA
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#  - apt-get update -qy
+#  - apt-get install -y nodejs
+#  - ruby -v
+#  - which ruby
+#  - gem install bundler  --no-ri --no-rdoc
+#  - bundle install --jobs $(nproc)  "${FLAGS[@]}" --path=/cache --without=development
+#  - bundle exec rails db:test:prepare
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t $TEST_IMAGE .
+    - RAILS_ENV=production bundle exec rake assets:precompile
+    - docker push $TEST_IMAGE
+
+test:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker pull $TEST_IMAGE
+    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rspec
+    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
+
+#test_rubocop_rspec: &test
+#  stage: test
+#  script:
+#  - bundle exec rubocop
+#  - bundle exec rspec
+
