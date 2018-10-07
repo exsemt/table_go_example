@@ -1,53 +1,51 @@
+image: docker:stable
+
+services:
+- docker:dind
+
 stages:
 - build
 - test
 - deploy
 
-image: ruby:2.5.1
+#variables:
+#  TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+#  LC_ALL: C.UTF-8
+#  LANG: en_US.UTF-8
+#  LANGUAGE: en_US.UTF-8
+#  RAILS_ENV: test
 
 variables:
-  TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  LC_ALL: C.UTF-8
-  LANG: en_US.UTF-8
-  LANGUAGE: en_US.UTF-8
-  RAILS_ENV: test
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+#  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build:
   stage: build
-  image: docker:latest
-  services:
-    - docker:dind
   script:
-    - docker build -t $TEST_IMAGE .
-    - docker push $TEST_IMAGE
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
 
-#rubocop:
-#  stage: test
-#  image: docker:latest
-#  services:
-#    - docker:dind
-#  script:
-#    - docker pull $TEST_IMAGE
-#    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
+rubocop:
+  stage: test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
 
 rspec:
   stage: test
-  image: $TEST_IMAGE
   script:
-    - docker pull $TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
-#    - bundle exec rake db:create db:test:prepare RAILS_ENV=test
-#    - "rspec -f d --color --tty"
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE \
+      /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
 
 #deploy:
 #  stage: deploy
-#  image: docker:latest
-#  services:
-#    - docker:dind
 #  script:
-#    - docker pull $TEST_IMAGE
+#  - ./deploy.sh
 #  only:
 #  - master
