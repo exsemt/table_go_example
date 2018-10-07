@@ -1,7 +1,6 @@
 stages:
 - build
 - test
-- deploy
 
 image: ruby:2.5.1
 
@@ -24,32 +23,18 @@ build:
     - docker build -t $TEST_IMAGE .
     - docker push $TEST_IMAGE
 
-rubocop:
-  stage: test
-  image: docker:latest
-  services:
-    - docker:dind
-  script:
-    - docker pull $TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
-
-rspec:
-  stage: test
-  image: $TEST_IMAGE
-#  services:
-#    - docker:dind
-  script:
-#    - docker pull $TEST_IMAGE
-#    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec'
-    - bundle exec rake db:create db:test:prepare RAILS_ENV=test
-    - "rspec -f d --color --tty"
-
-#deploy:
-#  stage: deploy
+#rubocop:
+#  stage: test
 #  image: docker:latest
 #  services:
 #    - docker:dind
 #  script:
 #    - docker pull $TEST_IMAGE
-#  only:
-#  - master
+#    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
+
+rspec:
+  stage: test
+  image: $TEST_IMAGE
+  script:
+    - bundle exec rake db:create db:test:prepare RAILS_ENV=test
+    - "rspec -f d --color --tty"
