@@ -41,6 +41,7 @@ test:
     - docker:dind
   script:
     - docker pull $TEST_IMAGE
+    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rails db:test:prepare
     - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rspec
     - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
 
