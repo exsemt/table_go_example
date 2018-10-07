@@ -31,7 +31,6 @@ build:
     - docker:dind
   script:
     - docker build -t $TEST_IMAGE .
-#    - RAILS_ENV=production bundle exec rake assets:precompile
     - docker push $TEST_IMAGE
 
 test:
@@ -41,9 +40,11 @@ test:
     - docker:dind
   script:
     - docker pull $TEST_IMAGE
-    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rails db:test:prepare
-    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rspec
-    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
+    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rake db:create db:test:prepare && rspec
+    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
+#    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rails db:test:prepare
+#    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rspec
+#    - docker run -e RAILS_ENV=test $TEST_IMAGE bin/bundle exec rubocop
 
 #test_rubocop_rspec: &test
 #  stage: test
