@@ -1,7 +1,7 @@
 stages:
 - build
 - test
-#- deploy
+- deploy
 
 image: ruby:2.5.1
 
@@ -35,9 +35,19 @@ rubocop:
 
 rspec:
   stage: test
-  image: docker:latest
-  services:
-    - docker:dind
+  image: $TEST_IMAGE
+#  services:
+#    - docker:dind
   script:
-    - docker pull $TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare; rspec'
+#    - docker pull $TEST_IMAGE
+    - docker run --rm -e RAILS_ENV=test $TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec'
+
+#deploy:
+#  stage: deploy
+#  image: docker:latest
+#  services:
+#    - docker:dind
+#  script:
+#    - docker pull $TEST_IMAGE
+#  only:
+#  - master
