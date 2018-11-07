@@ -1,8 +1,6 @@
-# Ignore bundler config.
 /.bundle
-
-# .env
 /.env
+/.git
 
 # configs
 # db/schema.rb
