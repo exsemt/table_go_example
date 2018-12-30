@@ -29,17 +29,17 @@ build:
   stage: test
   variables:
     RAILS_ENV: test
-  before_script:
-    - docker pull $CONTAINER_TEST_IMAGE
 
 rubocop:
   extends: .test
   script:
+    - docker pull $CONTAINER_TEST_IMAGE
     - docker run --rm -e $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
 
 rspec:
   extends: .test
   script:
+    - docker pull $CONTAINER_TEST_IMAGE
     - docker run --rm -e $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
 
 #release-image:
