@@ -37,6 +37,12 @@ rspec:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
 
+deploy-staging:
+  stage: deploy
+  when: manual
+  script:
+    - ./deploy.sh
+
 #release-image:
 #  stage: release
 #  script:
