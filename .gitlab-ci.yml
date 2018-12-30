@@ -1,5 +1,5 @@
 # https://docs.gitlab.com/ce/ci/docker/using_docker_build.html
-image: gitlab/dind
+image: docker:stable
 
 services:
   - docker:dind
@@ -35,12 +35,12 @@ build:
 rubocop:
   extends: .test
   script:
-    - docker run --rm -e $CONTAINER_TEST_IMAGE --privileged=true bin/bundle exec rubocop
+    - docker run --rm -e $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
 
 rspec:
   extends: .test
   script:
-    - docker run --rm -e $CONTAINER_TEST_IMAGE --privileged=true /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
+    - docker run --rm -e $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
 
 #release-image:
 #  stage: release
