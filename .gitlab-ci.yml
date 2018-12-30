@@ -1,14 +1,14 @@
 # https://docs.gitlab.com/ce/ci/docker/using_docker_build.html
-image: docker:stable
+image: gitlab/dind
 
 services:
-- docker:dind
+  - docker:dind
 
 stages:
-- build
-- test
-- release
-- deploy
+  - build
+  - test
+  - release
+  - deploy
 
 variables:
   DOCKER_HOST: tcp://docker:2375
@@ -25,17 +25,22 @@ build:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
-rubocop:
+.test:
   stage: test
-  script:
+  variables:
+    RAILS_ENV: test
+  before_script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
+
+rubocop:
+  extends: .test
+  script:
+    - docker run --rm -e $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
 
 rspec:
-  stage: test
+  extends: .test
   script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
+    - docker run --rm -e $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
 
 #release-image:
 #  stage: release
