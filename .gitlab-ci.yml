@@ -14,7 +14,7 @@ variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-#  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -27,36 +27,55 @@ build:
 
 rubocop:
   stage: test
-  environment:
-    name: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
 
 rspec:
   stage: test
-  environment:
-    name: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
 
-deploy-staging:
-  stage: deploy
-  environment:
-    name: staging
-  when: manual
-  script:
-    - ./deploy.sh
-
-#release-image:
-#  stage: release
+#deploy-staging:
+#  stage: deploy
+#  environment:
+#    name: staging
+#  when: manual
 #  script:
-#  - docker pull $CONTAINER_TEST_IMAGE
-#  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-#  - docker push $CONTAINER_RELEASE_IMAGE
+#    - ./deploy.sh
+
+release-image:
+  stage: release
+  script:
+  - docker pull $CONTAINER_TEST_IMAGE
+  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+  - docker push $CONTAINER_RELEASE_IMAGE
 #  only:
 #  - master
+
+deploy:
+  stage: deploy
+  environment:
+    name: production
+    url: http://table-go-example.exsemt.de
+  before_script:
+    #    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - 'which ssh-agent || ( apk update && apk add openssh-client )' # https://gitlab.com/gitlab-org/gitlab-ce/issues/30426
+    - eval $(ssh-agent -s)
+    #    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    #    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    #    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null # https://docs.gitlab.com/ee/ci/ssh_keys/
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | ssh-add - > ~/.ssh/id_rsa # https://gist.github.com/yannhowe/5ab1501156bd84c8ac261e2c17b8e3e0
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - scp ./docker-compose.prod.yml $DOCKER_SERVER:~/docker/table_go_example
+    - ssh $DOCKER_SERVER 'bash -s' docker-compose -f docker-compose.prod.yml pull
+    - ssh $DOCKER_SERVER 'bash -s' docker-compose -f docker-compose.prod.yml down
+    - ssh $DOCKER_SERVER 'bash -s' docker-compose -f docker-compose.prod.yml up -d
+#    - docker pull $CONTAINER_RELEASE_IMAGE
 
 #deploy:
 #  stage: deploy

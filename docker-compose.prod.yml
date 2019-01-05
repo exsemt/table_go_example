@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  app:
+    image: registry.gitlab.com/exsemt/table_go_example:latest
+    command: bash -c "RAILS_ENV=production bin/bundle exec rake db:create db:migrate db:seed assets:precompile && bin/bundle exec puma -p 3030"
+    environment:
+      VIRTUAL_HOST: test.exsemt.de
+#      VIRTUAL_HOST: table-go-example.exsemt.de
+      RAILS_ENV: production
+    network_mode: bridge
+    ports:
+      - "3030:3030"
+
+  # docker run -e VIRTUAL_HOST=table-go-example.exsemt.de -d -it -p 3000:3000 -e RAILS_ENV=production registry.gitlab.com/exsemt/table_go_example:develop /bin/bash -c 'bin/bundle exec rake db:create db:migrate assets:precompile db:seed && rails s'
+  # docker swarm init --advertise-addr 195.201.228.144
+  # docker stack deploy --compose-file docker-compose.prod.yml table-go-example
