@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-if ARGV.length < 1
+if ARGV.empty?
   puts 'add server as arguments e.g.: "user@server.com"'
   exit
 end
