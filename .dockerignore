@@ -1,0 +1,24 @@
+/.bundle
+/.env
+/.git
+
+# configs
+# db/schema.rb
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore coverage reports
+/coverage
+
+# Ignore reports
+spec/reports
+gemsurance_report.html
+
+### RubyMine ###
+# Covers JetBrains IDEs: RubyMine
+*.iml
+.idea/
+
+node_modules

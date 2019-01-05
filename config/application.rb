@@ -1,4 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 
@@ -19,14 +21,14 @@ module TableGoExample
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.available_locales = [:de, :en]
+    config.i18n.available_locales = %i[de en]
     config.i18n.default_locale = :de
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     I18n.enforce_available_locales = false
 
     config.generators do |g|
       g.test_framework      :rspec
-      g.fixture_replacement :factory_girl
+      g.fixture_replacement :factory_bot
       g.template_engine     :haml
       g.view_specs          false
       g.stylesheets         false

@@ -1,0 +1,46 @@
+# https://docs.gitlab.com/ce/ci/docker/using_docker_build.html
+image: docker:stable
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+  - release
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+rubocop:
+  stage: test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE bin/bundle exec rubocop
+
+rspec:
+  stage: test
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker run --rm -e RAILS_ENV=test $CONTAINER_TEST_IMAGE /bin/bash -c 'bin/bundle exec rake db:create db:test:prepare && rspec -f d --color --tty'
+
+release-image:
+  stage: release
+  script:
+  - docker pull $CONTAINER_TEST_IMAGE
+  - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+  - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+  - master

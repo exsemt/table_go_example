@@ -1,11 +1,11 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :author do
-    first_name "MyString"
-    last_name "MyString"
-    birthday "2013-10-06"
-    email "MyString"
-    phone "MyString"
+    first_name { 'MyString' }
+    last_name { 'MyString' }
+    birthday { '2013-10-06' }
+    email { 'MyString' }
+    phone { 'MyString' }
   end
 end

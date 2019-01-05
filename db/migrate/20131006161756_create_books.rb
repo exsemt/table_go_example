@@ -1,11 +1,13 @@
-class CreateBooks < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateBooks < ActiveRecord::Migration[4.2]
   def change
     create_table :books do |t|
       t.string :title
       t.string :isbn
       t.integer :pages
       t.integer :edition
-      t.decimal :price, :precision => 10, :scale => 2
+      t.decimal :price, precision: 10, scale: 2
       t.date :release_date
       t.integer :publisher_id
 

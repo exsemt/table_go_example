@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Your secret key is used for verifying the integrity of signed cookies.
@@ -9,4 +11,5 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-TableGoExample::Application.config.secret_key_base = '53fd5fd184202e24505759207e5b8052365bc358a7130aef285a7647ddc00972ed5ebe0ac3835cf2a981a48fa2b6c484bddaf95f96a56d433ea64b585dfeea95'
+TableGoExample::Application.config.secret_key_base =
+  '53fd5fd184202e24505759207e5b8052365bc358a7130aef285a7647ddc00972ed5ebe0ac3835cf2a981a48fa2b6c484bddaf95f96a56d433ea64b585dfeea95'

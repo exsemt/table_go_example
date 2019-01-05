@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -5,8 +7,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def pagination_defaults
-      { :per_page => 10, :page => params[:page] }
-    end
-
+  def pagination_defaults
+    { per_page: 10, page: params[:page] }
+  end
 end

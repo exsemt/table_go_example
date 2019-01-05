@@ -10,4 +10,4 @@ set :keep_releases, 2
 set :format_options, truncate: false
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
-set :linked_files, %w{db/production.sqlite3}
+set :linked_files, %w[db/production.sqlite3]
