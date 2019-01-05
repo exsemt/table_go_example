@@ -66,9 +66,10 @@ deploy:
     #    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     #    - ssh-add <(echo "$SSH_PRIVATE_KEY")
     #    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null # https://docs.gitlab.com/ee/ci/ssh_keys/
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | ssh-add - > ~/.ssh/id_rsa # https://gist.github.com/yannhowe/5ab1501156bd84c8ac261e2c17b8e3e0
+#    - mkdir -p ~/.ssh
+#    - chmod 700 ~/.ssh
+#    - echo "$SSH_PRIVATE_KEY" | ssh-add - > ~/.ssh/id_rsa # https://gist.github.com/yannhowe/5ab1501156bd84c8ac261e2c17b8e3e0
+    - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - scp ./docker-compose.prod.yml $DOCKER_SERVER:~/docker/table_go_example
