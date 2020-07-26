@@ -5,7 +5,7 @@ services:
     image: registry.gitlab.com/exsemt/table_go_example:latest
     command: bash -c "RAILS_ENV=production bin/bundle exec rake db:create db:migrate db:seed assets:precompile && bin/bundle exec puma -p 3030"
     environment:
-      VIRTUAL_HOST: table-go-example.exsemt.de
+      VIRTUAL_HOST: table-go-example.glusic.de
       RAILS_ENV: production
     network_mode: bridge
     ports:
