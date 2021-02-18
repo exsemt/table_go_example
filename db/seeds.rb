@@ -26,9 +26,9 @@ publisher_ids = Publisher.ids
     Book.create(
       authors: [author],
       title: Faker::Company.name,
-      isbn: Faker::Number.number(9),
-      pages: Faker::Number.number(2),
-      edition: Faker::Number.number(3),
+      isbn: Faker::Number.number(digits: 9),
+      pages: Faker::Number.number(digits: 2),
+      edition: Faker::Number.number(digits: 3),
       price: [2.99, 4.99, 8.95, 9.95, 19.95, 29.95, 39.95, 49.95, 59.95],
       release_date: rand(Date.new(1980)..Time.zone.today),
       publisher_id: publisher_ids.sample
