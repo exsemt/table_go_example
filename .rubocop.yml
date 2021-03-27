@@ -1,6 +1,7 @@
 require: rubocop-rspec
 
 AllCops:
+  NewCops: enable
   Exclude:
     - db/**/*
   TargetRubyVersion: 2.7
@@ -20,18 +21,6 @@ Metrics/LineLength:
 
 Metrics/MethodLength:
   Max: 15
-
-Rails:
-  Enabled: true
-
-Rails/HasAndBelongsToMany:
-  Enabled: false
-
-Rails/InverseOf:
-  Enabled: false
-
-RSpec/NestedGroups:
-  Max: 4
 
 RSpec/VerifiedDoubles:
   Enabled: false

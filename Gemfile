@@ -5,8 +5,8 @@ source 'https://rubygems.org'
 gem 'bundler'
 gem 'haml-rails'
 gem 'newrelic_rpm'
-gem 'rails', '< 6'
 gem 'puma'
+gem 'rails', '< 6'
 gem 'tzinfo-data'
 
 gem 'faker'
@@ -25,6 +25,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
 end
 
