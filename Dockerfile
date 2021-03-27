@@ -10,6 +10,7 @@ WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 
+RUN gem install bundler:2.2.6
 # BUG: https://github.com/sass/sassc-ruby/issues/146
 #RUN bundle check || gem install sassc -- --disable-march-tune-native
 RUN bundle check || bundle install
