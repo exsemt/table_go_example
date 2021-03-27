@@ -3,7 +3,7 @@ develop: [![pipeline status](https://gitlab.com/exsemt/table_go_example/badges/d
 
 # table go example application
 
-link: http://table-go-example.exsemt.de
+link: http://table-go-example.glusic.de
 
 ## How to use this app
 
